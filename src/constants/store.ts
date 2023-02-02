@@ -1,14 +1,24 @@
 import { create } from 'zustand';
 
 interface State {
-	bears: string;
-	setBears: (name: string) => void;
+	categoryName: string;
+	setCategoryName: (name: string) => void;
+}
+interface SubState {
+	subCategoryName: string;
+	setSubCategoryName: (name: string) => void;
 }
 
-const useStore = create<State>((set) => ({
-	bears: '회원 정보 관리',
-	setBears: (name) => {
-		set(() => ({ bears: name }));
+export const useCategory = create<State>((set) => ({
+	categoryName: '회원',
+	setCategoryName: (name) => {
+		set(() => ({ categoryName: name }));
 	},
 }));
-export default useStore;
+
+export const useSubCategory = create<SubState>((set) => ({
+	subCategoryName: '회원 정보 관리',
+	setSubCategoryName: (name) => {
+		set(() => ({ subCategoryName: name }));
+	},
+}));

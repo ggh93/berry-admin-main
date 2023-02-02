@@ -4,13 +4,12 @@ import { ReactNode } from 'react';
 const HeaderStyle = styled.header`
 	margin: auto;
 	width: 100%;
-	height: 80px;
+	height: 72px;
 	margin-bottom: 5px;
 	display: flex;
 	align-items: center;
 	justify-content: start;
 	position: fixed;
-	background: #e6e6e6;
 	nav {
 		width: 100%;
 		height: 45px;
@@ -27,8 +26,8 @@ const HeaderStyle = styled.header`
 		white-space: nowrap;
 	}
 	.img_logo {
-		margin: 10px 40px 10px 40px;
-		width: 200px;
+		margin: 8px 0px 0px 52px;
+		width: 150px;
 	}
 	.links {
 		position: absolute;
@@ -58,8 +57,11 @@ const HeaderStyle = styled.header`
 			border: none;
 			outline: none;
 			background: #03cf5d;
-			color: #ffffff;
 		}
+	}
+	.admin {
+		background: black;
+		border-radius: 20px;
 	}
 `;
 interface Header {

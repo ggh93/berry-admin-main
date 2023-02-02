@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import Testtes from './pages/Testtes';
 import TestPage from './TestPage';
 
 export default function App() {
@@ -8,7 +7,6 @@ export default function App() {
 	return (
 		<>
 			<TestPage />
-			<Testtes />
 		</>
 	);
 }
