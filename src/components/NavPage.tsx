@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { ReactNode } from 'react';
+import Toolbar from './Toolbar';
 
 const Navigator = styled.nav`
 	display: flex;
@@ -7,6 +8,11 @@ const Navigator = styled.nav`
 	width: 280px;
 	padding: 0px 20px;
 	flex-shrink: 0;
+	top: 100px;
+	position: sticky;
+	height: 800px;
+	overflow-y: auto;
+	overflow-x: hidden;
 	.nav-items {
 		width: 250px;
 		height: 64px;

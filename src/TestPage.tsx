@@ -9,6 +9,10 @@ import { Category, Sub } from './types/category';
 import Page from './pages/Test';
 import categoryIcon from './constants/categoryIcon';
 import { useState } from 'react';
+import NavItem from './components/NavItem';
+import Board from './components/Board';
+import { EmotionBox, EmotionBox1 } from './components/Board2';
+import styled from '@emotion/styled';
 
 export default function TestPage() {
 	const { categoryName, setCategoryName } = useCategory();
@@ -72,19 +76,13 @@ export default function TestPage() {
 		<div style={{ display: 'flex' }}>
 			<Header>
 				<Logo className="img_logo" />
-				<div className="links">
-					<a href="/admin">
-						<Icon.PersonFill width="30px" height="30px" fill="white" className="admin" />
-					</a>
-				</div>
+				<EmotionBox display="none">asd</EmotionBox>
+				<EmotionBox1>asdasd</EmotionBox1>
 			</Header>
 			<Nav>
-				<div className="tool-bar" style={{ height: '80px' }} />
-				<div className="nav-items">{categoryList}</div>
+				<NavItem>{categoryList}</NavItem>
 			</Nav>
 			<Main>
-				<div className="tool-bar" style={{ height: '80px' }} />
-				{/* 여기서부터 router & ContentLayout */}
 				<Page />
 			</Main>
 		</div>

@@ -29,40 +29,6 @@ const HeaderStyle = styled.header`
 		margin: 8px 0px 0px 52px;
 		width: 150px;
 	}
-	.links {
-		position: absolute;
-		top: 16px;
-		right: 0;
-	}
-	.search_box {
-		width: 520px;
-		height: 50px;
-		border: 2px solid #03cf5d;
-		display: flex;
-		align-items: center;
-		input {
-			flex: 9; /* search-box내부에서 9만큼의 크기를 차지(비율) */
-			height: 46px;
-			padding-left: 12px;
-			padding-right: 12px;
-			border: none;
-			outline: none;
-			font-size: 18px;
-		}
-		button {
-			flex: 1;
-			height: 46px;
-			margin: 0;
-			padding: 0;
-			border: none;
-			outline: none;
-			background: #03cf5d;
-		}
-	}
-	.admin {
-		background: black;
-		border-radius: 20px;
-	}
 `;
 interface Header {
 	children: ReactNode;
