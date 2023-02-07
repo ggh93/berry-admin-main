@@ -1,6 +1,6 @@
 import * as Icon from 'react-bootstrap-icons';
 
-export default function categoryIcon(name: string) {
+export default function CategoryIcon(name: string) {
 	switch (name) {
 		case '회원':
 			return <Icon.PersonFill className="main-header-icon" />;

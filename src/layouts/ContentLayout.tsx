@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { useCategory, useSubCategory } from '../constants/store';
-import categoryIcon from '../constants/categoryIcon';
+import CategoriesIcon from '../components/CategoryIcon';
 import * as Icon from 'react-bootstrap-icons';
 import ReactModal from 'react-modal';
 
@@ -29,7 +29,7 @@ export default function ContentLayout({ children }: Props) {
 		<div>
 			<div className="main-header">
 				<div style={{ display: 'flex' }}>
-					{categoryIcon(categoryName)}
+					{CategoriesIcon(categoryName)}
 					<div style={{ display: 'flex', alignItems: 'center' }}>
 						<div className="category font">{categoryName}</div>
 						<div className="category font">/</div>

@@ -10,6 +10,7 @@ const HeaderStyle = styled.header`
 	align-items: center;
 	justify-content: start;
 	position: fixed;
+	z-index: 1000;
 	nav {
 		width: 100%;
 		height: 45px;

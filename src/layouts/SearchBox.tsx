@@ -21,8 +21,10 @@ export default function SearchBox({ text, setText, placeholder, onChange }: Prop
 				/>
 			</div>
 			<div style={{ display: 'flex', color: '#4d69ff', alignContent: 'center' }}>
-				<div className="arrow-text">초기화</div>
-				<button onClick={() => setText('')}>
+				<label htmlFor="arrow" className="arrow-text">
+					초기화
+				</label>
+				<button id="arrow" onClick={() => setText('')}>
 					<Icon.ArrowRepeat className="arrow-icon" />
 				</button>
 			</div>

@@ -7,58 +7,32 @@ import { ReactComponent as Google } from '../assets/google.svg';
 import dayjs from '../lib/dayjs';
 import Toolbar from '../components/Toolbar';
 import Posts from './Posts';
-import { COLOR, FONT } from '../constants/color';
-import { css } from '@emotion/react';
-const titleStyle = css({
-	boxSizing: 'border-box',
-	width: 300,
-	height: 200,
-});
 
-const subtitleStyle = css`
-	box-sizing: border-box;
-	width: 100px;
-	height: 60px;
-	color: red;
-	background-color: aqua;
-`;
 export default function Test() {
 	const [search, setSearch] = useState('');
 	const [text, setText] = useState('');
 	const handleChange = (text: string) => {
-		console.log('COLOR ', COLOR.GrayScale700);
-
 		setSearch(text);
 	};
-
-	// Default
-	const Wrap = css`
-		width: 100px;
-		height: 100px;
-		color: red;
-		background-color: aqua;
-	`;
-	console.log(Wrap);
 	return (
 		<>
-			<div css={Wrap}>aaaz</div>
 			<ContentLayout>
 				<div style={{ display: 'flex', flexDirection: 'row' }}>
 					<div className="container">
 						<div className="container-header">
 							<div className="search-main">
-								{/* <SearchBox
+								<SearchBox
 									placeholder="계정 이메일, 휴대번호, 닉네임"
 									text={search}
 									setText={setSearch}
 									onChange={(e) => {
 										handleChange(e.target.value);
 									}}
-								/> */}
+								/>
 							</div>
 						</div>
 						<div className="container-item">
-							<div className="item-1">계정 생성 날짜</div>
+							<div className="item-1">최근 신고 날짜</div>
 							<div className="item">
 								<input
 									type={'date'}
@@ -86,71 +60,83 @@ export default function Test() {
 									<label htmlFor="month">1개월</label>
 								</div>
 								<div className="item-radio-box">
-									<input type={'radio'} id="allday" name="contact" value="all" />
-									<label htmlFor="allday">전체</label>
-								</div>
-							</div>
-						</div>
-						<div className="container-item">
-							<div className="item-1">가입 유형</div>
-							<div className="item">
-								<select id="join-select" style={{ width: '125px' }}>
-									<option value="all">전체</option>
-									<option value="google">구글 계정</option>
-									<option value="apple">애플 계정</option>
-									<option value="default">기타</option>
-								</select>
-							</div>
-							<div className="item-2">카테고리</div>
-							<div className="item">
-								<select id="category-select" style={{ width: '125px' }} disabled>
-									<option value="all">전체</option>
-								</select>
-							</div>
-						</div>
-						<div className="container-item">
-							<div className="item-1">회원 성별</div>
-							<div className="item">
-								<select id="user-select" style={{ width: '125px' }}>
-									<option value="all">전체</option>
-									<option value="man">남성</option>
-									<option value="woman">여성</option>
-								</select>
-							</div>
-						</div>
-						<div className="container-item-bottom">
-							<div className="item-1">
-								회원 연령<p>(복수 선택 가능)</p>
-							</div>
-							<div className="item">
-								<div className="item-radio-box">
-									<input type={'radio'} id="all" name="age" value="all" defaultChecked />
+									<input type={'radio'} id="all" name="contact" value="all" />
 									<label htmlFor="all">전체</label>
 								</div>
+							</div>
+						</div>
+						<div className="container-item">
+							<div className="item-1">최초 신고 날짜</div>
+							<div className="item">
+								<input
+									type={'date'}
+									defaultValue={dayjs().format('YYYY-MM-DD')}
+									style={{ width: '115px' }}
+								/>
+								<Icon.ArrowRightShort width={20} height={30} style={{ margin: '0px 20px' }} />
+								<input
+									type={'date'}
+									defaultValue={dayjs().format('YYYY-MM-DD')}
+									style={{ width: '115px' }}
+								/>
+							</div>
+							<div className="item">
 								<div className="item-radio-box">
-									<input type={'radio'} id="ten" name="age" value="10" />
-									<label htmlFor="ten">10대</label>
+									<input type={'radio'} id="today" name="contact" value="today" />
+									<label htmlFor="today">오늘</label>
 								</div>
 								<div className="item-radio-box">
-									<input type={'radio'} id="twenty" name="age" value="20" />
-									<label htmlFor="twenty">20대</label>
+									<input type={'radio'} id="week" name="contact" value="week" />
+									<label htmlFor="week">1주일</label>
 								</div>
 								<div className="item-radio-box">
-									<input type={'radio'} id="thirty" name="age" value="30" />
-									<label htmlFor="thirty">30대</label>
+									<input type={'radio'} id="month" name="contact" value="month" defaultChecked />
+									<label htmlFor="month">1개월</label>
 								</div>
 								<div className="item-radio-box">
-									<input type={'radio'} id="fourty" name="age" value="40" />
-									<label htmlFor="fourty">40대</label>
+									<input type={'radio'} id="all" name="contact" value="all" />
+									<label htmlFor="all">전체</label>
+								</div>
+							</div>
+						</div>
+						<div className="container-item">
+							<div className="item-1">신고 유형</div>
+							<div className="item">
+								<select id="join-select" style={{ width: '125px' }}>
+									<option value="sns">소셜</option>
+									<option value="nft">NFT</option>
+								</select>
+							</div>
+							<div className="item-2">처리 현황</div>
+							<div className="item">
+								<div className="item-radio-box">
+									<input type={'radio'} id="today" name="contact" value="today" />
+									<label htmlFor="today">전체</label>
 								</div>
 								<div className="item-radio-box">
-									<input type={'radio'} id="fifty" name="age" value="50" />
-									<label htmlFor="fifty">50대</label>
+									<input type={'radio'} id="week" name="contact" value="week" />
+									<label htmlFor="week">승인</label>
 								</div>
 								<div className="item-radio-box">
-									<input type={'radio'} id="fixty" name="age" value="60" />
-									<label htmlFor="fixty">60대 이상</label>
+									<input type={'radio'} id="month" name="contact" value="month" defaultChecked />
+									<label htmlFor="month">미승인</label>
 								</div>
+								<div className="item-radio-box">
+									<input type={'radio'} id="all" name="contact" value="all" />
+									<label htmlFor="all">미처리</label>
+								</div>
+							</div>
+						</div>
+						<div className="container-item">
+							<div className="item-1">신고 사유</div>
+							<div className="item">
+								<select id="user-select" style={{ width: '200px' }}>
+									<option value="all">전체</option>
+									<option value="man">공격적인 언행</option>
+									<option value="woman">저적권 도용 및 침해</option>
+									<option value="woman">성적 행위</option>
+									<option value="woman">기타</option>
+								</select>
 							</div>
 						</div>
 					</div>
@@ -161,11 +147,7 @@ export default function Test() {
 									<div className="frame-text-top">전체 누적 회원수</div>
 									<div className="frame-text-mid">4,612,619 명</div>
 									<div className="frame-text-bottom">
-										어제 보다{' '}
-										<div className="blue_text" style={{ fontSize: FONT.FontSize10 }}>
-											151%
-										</div>{' '}
-										올랐어요.
+										어제 보다 <div className="blue_text">15%</div> 올랐어요.
 									</div>
 								</div>
 							</div>
@@ -298,10 +280,8 @@ export default function Test() {
 					</button>
 					<div style={{ display: 'flex' }}>
 						<div style={{ display: 'flex', color: '#4d69ff', alignContent: 'center' }}>
-							<label htmlFor="filter" className="arrow-text">
-								초기화
-							</label>
-							<button id="filter" onClick={() => setText('')}>
+							<div className="arrow-text">초기화</div>
+							<button onClick={() => setText('')}>
 								<Icon.ArrowRepeat className="arrow-icon" />
 							</button>
 						</div>

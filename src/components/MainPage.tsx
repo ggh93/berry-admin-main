@@ -11,6 +11,10 @@ const MainStyle = styled.main`
 		background: black;
 		border-radius: 20px;
 	}
+	.blue_text {
+		color: #4d69ff;
+		margin: 0px 4px;
+	}
 	.main-header {
 		border-bottom: 1px solid #d8dbef;
 		top: 0px;
@@ -20,6 +24,7 @@ const MainStyle = styled.main`
 		height: 72px;
 		justify-content: space-between;
 		align-items: center;
+		z-index: 1000;
 		h3 {
 			margin-left: 10px;
 		}
@@ -60,6 +65,9 @@ const MainStyle = styled.main`
 		width: 35px;
 		height: 17px;
 		display: flex;
+		path {
+			color: #5a75ff;
+		}
 	}
 	.arrow-text {
 		display: flex;
@@ -67,6 +75,7 @@ const MainStyle = styled.main`
 		font-weight: 400;
 		font-size: 12px;
 		line-height: 16px;
+		color: #5a75ff;
 	}
 	.category {
 		margin-left: 5px;
@@ -303,6 +312,7 @@ const MainStyle = styled.main`
 		outline: 0px;
 	}
 	.list-head-item {
+		color: #242633;
 		background: #d8dbef;
 		border-right: 0.5px solid #b0b4d0;
 		border-bottom: 0.5px solid #b0b4d0;
@@ -380,8 +390,10 @@ const MainStyle = styled.main`
 		background: #f1f3ff;
 	}
 	.person-text-weight {
+		color: #10121b;
 		font-weight: 500;
 		height: 20px;
+		display: flex;
 	}
 	.person-text {
 		font-size: 14px;

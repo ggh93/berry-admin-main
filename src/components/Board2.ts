@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import React from 'react';
 
 export const EmotionBox = styled.div`
 	background-color: yellow;
@@ -29,3 +28,10 @@ export const EmotionBox1 = styled.div`
 		background-color: orange;
 	}
 `;
+export const EmotionBox2 = styled.div({
+	backgroundColor: 'red',
+	width: '100px',
+	padding: '20px',
+});
+export const Emotion1Button = EmotionBox1.withComponent('button');
+export const EmotionButton = EmotionBox2.withComponent('button');

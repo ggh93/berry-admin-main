@@ -1,34 +1,44 @@
+import { useCallback, useState } from 'react';
+import * as Icon from 'react-bootstrap-icons';
+import { useNavigate } from 'react-router-dom';
+import { ReactComponent as Logo } from './assets/logo.svg';
 import Header from './components/HeaderPage';
 import Main from './components/MainPage';
-import Nav from './components/NavPage';
-import { ReactComponent as Logo } from './assets/logo.svg';
-import * as Icon from 'react-bootstrap-icons';
-import CATEGORIES from './constants/category';
+// import NavItem from './components/NavItem';
+import { NavAccordion, NavHeader, Navigator, NavItem } from './components/NavPage';
+
+import Toolbar from './components/Toolbar';
+import CATEGORIES from './components/Categories';
+import CategoriesIcon from './components/CategoryIcon';
 import { useCategory, useSubCategory } from './constants/store';
+import Router from './core/router';
 import { Category, Sub } from './types/category';
-import Page from './pages/Test';
-import categoryIcon from './constants/categoryIcon';
-import { useState } from 'react';
-import NavItem from './components/NavItem';
-import Board from './components/Board';
-import { EmotionBox, EmotionBox1 } from './components/Board2';
-import styled from '@emotion/styled';
+import { css } from '@emotion/css';
 
 export default function TestPage() {
-	const { categoryName, setCategoryName } = useCategory();
+	const { setCategoryName } = useCategory();
 	const { subCategoryName, setSubCategoryName } = useSubCategory();
 	const [accordion, setAccordion] = useState(true);
+	const [display, setDisplay] = useState('none');
+	const navigate = useNavigate();
+
+	const onChangeHandler = (id: string) => {
+		navigate(id);
+	};
+
+	const onClick = useCallback(() => {
+		// 차후에 개발
+		setDisplay((prevDisplay) => (prevDisplay === 'none' ? 'block' : 'none'));
+	}, []);
 
 	const categoryList = Object.values(CATEGORIES).map((category: Category, id: number) => {
 		return (
 			<nav key={id}>
-				<div className="nav-header">
-					{categoryIcon(category.name)}
+				<NavHeader>
+					{CategoriesIcon(category.name)}
 					<h3 style={{ alignItems: 'start' }}>{category.name}</h3>
 					<button
 						onClick={() => {
-							console.log('categoryName ', category.name);
-
 							if (accordion) {
 								setAccordion(false);
 							} else {
@@ -43,31 +53,32 @@ export default function TestPage() {
 							<Icon.ChevronDown className="accordion" />
 						)}
 					</button>
-				</div>
-				<div className="nav-body">
-					<div className={accordion ? 'nav-accordion on' : 'nav-accordion off'}>
-						{category.sub.map((subCategory: Sub, id: number) => {
-							return (
-								<button
-									key={id}
-									onClick={() => {
-										setCategoryName(category.name);
-										setSubCategoryName(subCategory.name);
-									}}
+				</NavHeader>
+				<NavAccordion>
+					<div css={css``}></div>
+					{category.sub.map((subCategory: Sub, id: number) => {
+						return (
+							<button
+								key={id}
+								onClick={() => {
+									onChangeHandler(subCategory.value);
+									setCategoryName(category.name);
+									setSubCategoryName(subCategory.name);
+								}}
+							>
+								<div
+									aria-label=""
+									className={
+										subCategoryName === subCategory.name ? 'nav-buttons selected' : 'nav-buttons'
+									}
 								>
-									<div
-										className={
-											subCategoryName === subCategory.name ? 'nav-buttons selected' : 'nav-buttons'
-										}
-									>
-										{subCategory.name}
-										<Icon.Pencil />
-									</div>
-								</button>
-							);
-						})}
-					</div>
-				</div>
+									{subCategory.name}
+									<Icon.Pencil />
+								</div>
+							</button>
+						);
+					})}
+				</NavAccordion>
 			</nav>
 		);
 	});
@@ -76,14 +87,19 @@ export default function TestPage() {
 		<div style={{ display: 'flex' }}>
 			<Header>
 				<Logo className="img_logo" />
-				<EmotionBox display="none">asd</EmotionBox>
-				<EmotionBox1>asdasd</EmotionBox1>
 			</Header>
-			<Nav>
+			<Navigator>
+				<Toolbar />
+				<nav>
+					<div>{categoryList}</div>
+				</nav>
+			</Navigator>
+			{/* <Nav>
 				<NavItem>{categoryList}</NavItem>
-			</Nav>
+			</Nav> */}
 			<Main>
-				<Page />
+				<Toolbar />
+				<Router />
 			</Main>
 		</div>
 	);
