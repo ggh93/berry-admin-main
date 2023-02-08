@@ -5,25 +5,17 @@ import * as Icon from 'react-bootstrap-icons';
 import { ReactComponent as Apple } from '../assets/apple.svg';
 import { ReactComponent as Google } from '../assets/google.svg';
 import dayjs from '../lib/dayjs';
-import Toolbar from '../components/Toolbar';
+
 import Posts from './Posts';
 import { COLOR, FONT } from '../constants/color';
-import { css } from '@emotion/react';
-const titleStyle = css({
-	boxSizing: 'border-box',
-	width: 300,
-	height: 200,
-});
 
-const subtitleStyle = css`
-	box-sizing: border-box;
-	width: 100px;
-	height: 60px;
-	color: red;
-	background-color: aqua;
-`;
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+import { BottomLine } from '../styles/theme';
+
 export default function Test() {
 	const [search, setSearch] = useState('');
+
 	const [text, setText] = useState('');
 	const handleChange = (text: string) => {
 		console.log('COLOR ', COLOR.GrayScale700);
@@ -31,34 +23,108 @@ export default function Test() {
 		setSearch(text);
 	};
 
+	const [joinData, setJoinData] = useState('전체');
+
+	const handleChangeJoin = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+		setJoinData(e.currentTarget.innerHTML);
+		setView(false);
+	};
+	const [view, setView] = useState(false);
+
+	interface Menu {
+		title: string;
+		value: string;
+		type: string;
+	}
+
+	const signUpMethodList: Array<Menu> = [
+		{ title: '전체', value: 'all', type: 'sign_up_method' },
+		{ title: '구글 계정', value: 'google', type: 'sign_up_method' },
+		{ title: '애플 계정', value: 'apple', type: 'sign_up_method' },
+		{ title: '기타', value: 'other', type: 'sign_up_method' },
+	];
+
+	const categoryList: Array<Menu> = [{ title: '전체', value: 'all', type: 'category' }];
+
+	const userGenderList: Array<Menu> = [
+		{ title: '전체', value: 'all', type: 'user_gender' },
+		{ title: '남자', value: 'man', type: 'user_gender' },
+		{ title: '여자', value: 'woman', type: 'user_gender' },
+	];
+
+	const DropDown = () => {
+		return (
+			<ul
+				className="relative p-2 shadow menu bg-base-100 rounded-box w-52"
+				css={css`
+					width: 141px;
+					padding: 8px;
+					display: flex;
+					flex-direction: column;
+					align-items: flex-start;
+					/* right: 10px; */
+					border-radius: 8px;
+					box-shadow: 1px 2px 6px 1px #0000001f;
+					font-weight: 400;
+					font-size: 12px;
+				`}
+			>
+				{signUpMethodList.map((data: Menu, id) => {
+					return (
+						<button
+							key={id}
+							css={TopButton}
+							value={data.value}
+							onClick={(e) => handleChangeJoin(e)}
+						>
+							{data.title}
+						</button>
+					);
+				})}
+			</ul>
+		);
+	};
+
 	// Default
 	const Wrap = css`
-		width: 100px;
-		height: 100px;
-		color: red;
-		background-color: aqua;
+		display: flex;
+		flex-direction: row;
 	`;
-	console.log(Wrap);
+	const TopButton = css`
+		width: 125px;
+		:hover {
+			color: #4d69ff;
+			background: #d8dbef;
+		}
+		height: 30px;
+		border-radius: 5px;
+		flex: none;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: center;
+		padding: 7px 18px 7px 12px;
+		display: flex;
+		background: white;
+	`;
 	return (
 		<>
-			<div css={Wrap}>aaaz</div>
 			<ContentLayout>
-				<div style={{ display: 'flex', flexDirection: 'row' }}>
+				<div css={Wrap}>
 					<div className="container">
 						<div className="container-header">
 							<div className="search-main">
-								{/* <SearchBox
+								<SearchBox
 									placeholder="계정 이메일, 휴대번호, 닉네임"
 									text={search}
 									setText={setSearch}
 									onChange={(e) => {
 										handleChange(e.target.value);
 									}}
-								/> */}
+								/>
 							</div>
 						</div>
 						<div className="container-item">
-							<div className="item-1">계정 생성 날짜</div>
+							<div className="item-1">가입 일자</div>
 							<div className="item">
 								<input
 									type={'date'}
@@ -93,13 +159,21 @@ export default function Test() {
 						</div>
 						<div className="container-item">
 							<div className="item-1">가입 유형</div>
-							<div className="item">
-								<select id="join-select" style={{ width: '125px' }}>
-									<option value="all">전체</option>
-									<option value="google">구글 계정</option>
-									<option value="apple">애플 계정</option>
-									<option value="default">기타</option>
-								</select>
+							<div css={BottomLine} className="item">
+								<div className="h-6 m-1">
+									<div
+										onClick={() => {
+											setView(!view);
+										}}
+										className="flex justify-between px-3 w-36"
+									>
+										{joinData}
+										<div>
+											<Icon.ChevronDown className="mt-1 ml-2" />
+										</div>
+									</div>
+									{view ? <DropDown /> : ''}
+								</div>
 							</div>
 							<div className="item-2">카테고리</div>
 							<div className="item">
@@ -115,6 +189,13 @@ export default function Test() {
 									<option value="all">전체</option>
 									<option value="man">남성</option>
 									<option value="woman">여성</option>
+								</select>
+							</div>
+							<div className="item-2">계좌 인증 여부</div>
+							<div className="item">
+								<select id="category-select" style={{ width: '125px' }}>
+									<option value="auth">인증</option>
+									<option value="noauth">미인증</option>
 								</select>
 							</div>
 						</div>

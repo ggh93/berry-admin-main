@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import TestPage from './TestPage';
 
 export default function App() {

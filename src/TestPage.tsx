@@ -35,9 +35,8 @@ export default function TestPage() {
 		return (
 			<nav key={id}>
 				<NavHeader>
-					{CategoriesIcon(category.name)}
-					<h3 style={{ alignItems: 'start' }}>{category.name}</h3>
 					<button
+						className="flex items-center justify-between h-16 w-52"
 						onClick={() => {
 							if (accordion) {
 								setAccordion(false);
@@ -45,17 +44,21 @@ export default function TestPage() {
 								setAccordion(true);
 							}
 						}}
-						className={accordion === true ? 'accordion_button selected' : 'accordion_button'}
 					>
-						{accordion ? (
-							<Icon.ChevronRight className="accordion" />
-						) : (
-							<Icon.ChevronDown className="accordion" />
-						)}
+						<div className="flex">
+							{CategoriesIcon(category.name)}
+							<h3 className="ml-8">{category.name}</h3>
+						</div>
+						<div className={accordion === true ? 'accordion_button selected' : 'accordion_button'}>
+							{accordion ? (
+								<Icon.ChevronRight className="accordion" />
+							) : (
+								<Icon.ChevronDown className="accordion" />
+							)}
+						</div>
 					</button>
 				</NavHeader>
 				<NavAccordion>
-					<div css={css``}></div>
 					{category.sub.map((subCategory: Sub, id: number) => {
 						return (
 							<button
@@ -86,17 +89,13 @@ export default function TestPage() {
 	return (
 		<div style={{ display: 'flex' }}>
 			<Header>
-				<Logo className="img_logo" />
+				<button>
+					<Logo className="img_logo" />
+				</button>
 			</Header>
 			<Navigator>
-				<Toolbar />
-				<nav>
-					<div>{categoryList}</div>
-				</nav>
+				<div style={{ marginTop: '100px' }}>{categoryList}</div>
 			</Navigator>
-			{/* <Nav>
-				<NavItem>{categoryList}</NavItem>
-			</Nav> */}
 			<Main>
 				<Toolbar />
 				<Router />

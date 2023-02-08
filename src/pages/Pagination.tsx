@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { log } from 'console';
 import { MouseEvent, useState } from 'react';
@@ -21,6 +22,7 @@ export default function Pagination({ limit, page, setPage, total }: Props) {
 	 * 1번클릭 -> id값 1 삽입
 	 * key === id ? true : false
 	 * value === true => background : "green"
+	 * value === true => background : "red"
 	 */
 	return (
 		<Nav>
@@ -95,11 +97,16 @@ const Button = styled.button`
 	}
 
 	&[disabled] {
-		background: grey;
+		background: #4d69ff;
 		cursor: revert;
 		transform: revert;
+		color: white;
 		svg {
-			background: grey;
+			background: #4d69ff;
+			color: white;
+			path {
+				color: white;
+			}
 		}
 	}
 `;

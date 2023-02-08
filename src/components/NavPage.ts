@@ -32,11 +32,11 @@ export const NavItem = styled.div`
 
 export const NavHeader = styled.div`
 	display: flex;
-	width: 225px;
+	width: 236px;
 	height: 64px;
 	align-items: center;
 	justify-content: space-between;
-	padding-left: 20px;
+	padding-left: 16px;
 	svg {
 		width: 22px;
 		height: 22px;

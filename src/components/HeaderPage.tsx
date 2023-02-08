@@ -27,8 +27,8 @@ const HeaderStyle = styled.header`
 		white-space: nowrap;
 	}
 	.img_logo {
-		margin: 8px 0px 0px 52px;
-		width: 150px;
+		margin: 12px 0px 0px 50px;
+		width: 160px;
 	}
 `;
 interface Header {

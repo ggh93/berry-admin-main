@@ -1,3 +1,6 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+
 export const size = {
 	largest: '75em', // 1200px
 	large: '56.25em', // 900px
@@ -6,7 +9,7 @@ export const size = {
 	smallest: '25em', // 400px
 };
 
-const theme = {
+export const theme = {
 	mainColor: '#0000ff',
 	mq: {
 		laptop: `@media only screen and (min-width: ${size.largest})`,
@@ -15,4 +18,15 @@ const theme = {
 	},
 };
 
-export default theme;
+export const BottomLine = css`
+	position: relative;
+	::before {
+		content: '';
+		width: 70%;
+		height: 1px;
+		position: absolute;
+		bottom: -1px;
+		left: 0;
+		background-color: #4260ff;
+	}
+`;

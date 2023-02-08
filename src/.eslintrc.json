@@ -1,0 +1,6 @@
+{
+	"root": true,
+	"plugins": ["import", "react"],
+	"parser": "@babel/eslint-parser",
+	"parserOptions": { "requireConfigFile": "false" }
+}

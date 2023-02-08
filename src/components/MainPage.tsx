@@ -108,7 +108,8 @@ const MainStyle = styled.main`
 		font-size: 14px;
 	}
 	.container-header {
-		height: 70px;
+		height: 46px;
+		margin-bottom: 20px;
 		display: flex;
 		flex-direction: row;
 	}
@@ -401,9 +402,15 @@ const MainStyle = styled.main`
 		color: #4e5165;
 	}
 	.list-body-none {
-		display: none;
+		display: flex;
 		flex-direction: column;
 		align-items: center;
+		svg {
+			* {
+				background-color: #10121b;
+				color: #d8dbef;
+			}
+		}
 	}
 	.person-radio-box {
 		margin: 12px;
