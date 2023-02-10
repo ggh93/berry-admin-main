@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import * as Icon from 'react-bootstrap-icons';
 
 interface Props {
@@ -8,11 +9,14 @@ interface Props {
 }
 
 export default function SearchBox({ text, setText, placeholder, onChange }: Props) {
+	// The input will lose focus after 3 seconds
+
 	return (
 		<div className="search-header">
 			<div className="search-box">
 				<Icon.Search className="search-icon" />
 				<input
+					id="sampleText"
 					className="search-text"
 					placeholder={placeholder}
 					type="text"

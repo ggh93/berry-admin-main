@@ -55,6 +55,19 @@ export default function ContentLayout({ children }: Props) {
 		display: flex;
 		background: '#D8DBEF';
 	`;
+
+	const AdminCss = css`
+		@keyframes slide-fade-in-dropdown-animation {
+			0% {
+				transform: translateY(10%);
+			}
+
+			100% {
+				transform: translateY(0);
+			}
+		}
+		animation: slide-fade-in-dropdown-animation 0.4s ease;
+	`;
 	return (
 		<div>
 			<div className="main-header">

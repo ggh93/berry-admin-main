@@ -1,7 +1,7 @@
-import styled from '@emotion/styled';
-import { ReactNode } from 'react';
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 
-const MainStyle = styled.main`
+export const MainStyle = css`
 	min-height: 700px;
 	.links {
 		top: 16px;
@@ -443,10 +443,3 @@ const MainStyle = styled.main`
 		//반응형의 경우 padding이 없으면 박스가 화면에 붙어서 안이뻐짐
 	}
 `;
-
-interface MainProps {
-	children: ReactNode;
-}
-export default function Main({ children }: MainProps) {
-	return <MainStyle>{children}</MainStyle>;
-}

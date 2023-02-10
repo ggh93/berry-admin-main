@@ -88,11 +88,11 @@ const Button = styled.button`
 	color: white; */
 	font-size: 1rem;
 	&:hover {
-		background: rgb(217, 184, 255);
+		background: #94a4f9;
 		cursor: pointer;
 		transform: translateY(-2px);
 		svg {
-			background: rgb(217, 184, 255);
+			background: #94a4f9;
 		}
 	}
 

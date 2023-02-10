@@ -1,95 +1,144 @@
 import { useState } from 'react';
-import ContentLayout from '../layouts/ContentLayout';
-import SearchBox from '../layouts/SearchBox';
 import * as Icon from 'react-bootstrap-icons';
 import { ReactComponent as Apple } from '../assets/apple.svg';
 import { ReactComponent as Google } from '../assets/google.svg';
+import ContentLayout from '../layouts/ContentLayout';
+import SearchBox from '../layouts/SearchBox';
 import dayjs from '../lib/dayjs';
 
+import { COLOR } from '../constants/color';
 import Posts from './Posts';
-import { COLOR, FONT } from '../constants/color';
 
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { useForm } from 'react-hook-form';
 import { BottomLine } from '../styles/theme';
 
 export default function Test() {
+	const { register, setValue } = useForm<{
+		search: string;
+		dropdown: {
+			social?: Menu;
+			category?: Menu;
+			gender?: Menu;
+			account?: Menu;
+		};
+	}>();
 	const [search, setSearch] = useState('');
 
-	const [text, setText] = useState('');
 	const handleChange = (text: string) => {
 		console.log('COLOR ', COLOR.GrayScale700);
 
 		setSearch(text);
 	};
 
-	const [joinData, setJoinData] = useState('전체');
+	type Menu = {
+		title: string;
+		value: string;
+		group?: string;
+	};
 
+	const signUpMethodList: Array<Menu> = [
+		{ title: '전체', value: 'all', group: 'sign_up_method' },
+		{ title: '구글 계정', value: 'google', group: 'sign_up_method' },
+		{ title: '애플 계정', value: 'apple', group: 'sign_up_method' },
+		{ title: '기타', value: 'other', group: 'sign_up_method' },
+	];
+
+	const categoryList: Array<Menu> = [{ title: '전체', value: 'all', group: 'category' }];
+
+	const userGenderList: Array<Menu> = [
+		{ title: '전체', value: 'all', group: 'user_gender' },
+		{ title: '남자', value: 'man', group: 'user_gender' },
+		{ title: '여자', value: 'woman', group: 'user_gender' },
+	];
+
+	const [first, setfirst] = useState<{
+		search: string;
+		dropdown: {
+			social?: Menu;
+			category?: Menu;
+			gender?: Menu;
+			account?: Menu;
+		};
+	}>({ search: '', dropdown: {} });
+
+	const searchDropBoxCss = css`
+		width: 180px;
+		height: 36px;
+		border-radius: 5px;
+		padding: 5px 20px;
+		border: 1px solid #d8dbef;
+		gap: 10px;
+	`;
+
+	const [view, setView] = useState(false); // 추후 blur 추가
+	const [joinData, setJoinData] = useState('전체');
 	const handleChangeJoin = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		setJoinData(e.currentTarget.innerHTML);
 		setView(false);
 	};
-	const [view, setView] = useState(false);
 
-	interface Menu {
-		title: string;
-		value: string;
-		type: string;
-	}
-
-	const signUpMethodList: Array<Menu> = [
-		{ title: '전체', value: 'all', type: 'sign_up_method' },
-		{ title: '구글 계정', value: 'google', type: 'sign_up_method' },
-		{ title: '애플 계정', value: 'apple', type: 'sign_up_method' },
-		{ title: '기타', value: 'other', type: 'sign_up_method' },
-	];
-
-	const categoryList: Array<Menu> = [{ title: '전체', value: 'all', type: 'category' }];
-
-	const userGenderList: Array<Menu> = [
-		{ title: '전체', value: 'all', type: 'user_gender' },
-		{ title: '남자', value: 'man', type: 'user_gender' },
-		{ title: '여자', value: 'woman', type: 'user_gender' },
-	];
-
+	type GroupName = { group: string };
+	/**
+	 * 각각의 리스트들은 타입에 따라 구조분해 후 재할당하여 입력
+	 * @type 타입별로 드롭다운 아이템을 각각 출력
+	 * @param string type
+	 * @returns 드롭다운 아이템
+	 */
+	// 입력 따로 ex) DropBox => DropBoxList => DropBoxItem
 	const DropDown = () => {
 		return (
-			<ul
-				className="relative p-2 shadow menu bg-base-100 rounded-box w-52"
-				css={css`
-					width: 141px;
-					padding: 8px;
-					display: flex;
-					flex-direction: column;
-					align-items: flex-start;
-					/* right: 10px; */
-					border-radius: 8px;
-					box-shadow: 1px 2px 6px 1px #0000001f;
-					font-weight: 400;
-					font-size: 12px;
-				`}
-			>
-				{signUpMethodList.map((data: Menu, id) => {
-					return (
-						<button
-							key={id}
-							css={TopButton}
-							value={data.value}
-							onClick={(e) => handleChangeJoin(e)}
-						>
-							{data.title}
-						</button>
-					);
-				})}
-			</ul>
+			<></>
+			// <ul
+			// 	className="relative shadow menu bg-base-100"
+			// 	css={css`
+			// 		width: 141px;
+			// 		padding: 8px;
+			// 		display: flex;
+			// 		flex-direction: column;
+			// 		align-items: flex-start;
+			// 		/* right: 10px; */
+			// 		border-radius: 8px;
+			// 		box-shadow: 1px 2px 6px 1px #0000001f;
+			// 		font-weight: 400;
+			// 		font-size: 12px;
+			// 		@keyframes slide-fade-in-dropdown-animation {
+			// 			0% {
+			// 				transform: translateY(10%);
+			// 			}
+
+			// 			100% {
+			// 				transform: translateY(0);
+			// 			}
+			// 		}
+
+			// 		.slide-fade-in-dropdown {
+			// 			overflow: hidden;
+			// 		}
+			// 		animation: slide-fade-in-dropdown-animation 0.4s ease;
+			// 	`}
+			// >
+			// 	{signUpMethodList.map((data: Menu, id) => {
+			// 		return (
+			// 			<li>
+			// 				<button
+			// 					key={id}
+			// 					css={TopButton}
+			// 					value={data.value}
+			// 					onClick={(e) => handleChangeJoin(e)}
+			// 				>
+			// 					{data.title}
+			// 				</button>
+			// 			</li>
+			// 		);
+			// 	})}
+			// 	{/* 여기는 호출따로 */}
+			// </ul>
 		);
 	};
 
 	// Default
-	const Wrap = css`
-		display: flex;
-		flex-direction: row;
-	`;
 	const TopButton = css`
 		width: 125px;
 		:hover {
@@ -104,12 +153,18 @@ export default function Test() {
 		justify-content: center;
 		padding: 7px 18px 7px 12px;
 		display: flex;
+		cursor: pointer;
 		background: white;
 	`;
 	return (
 		<>
 			<ContentLayout>
-				<div css={Wrap}>
+				<div
+					css={css`
+						display: flex;
+						flex-direction: row;
+					`}
+				>
 					<div className="container">
 						<div className="container-header">
 							<div className="search-main">
@@ -159,8 +214,8 @@ export default function Test() {
 						</div>
 						<div className="container-item">
 							<div className="item-1">가입 유형</div>
-							<div css={BottomLine} className="item">
-								<div className="h-6 m-1">
+							<div className="item" css={BottomLine}>
+								{/* <div className="h-6 m-1">
 									<div
 										onClick={() => {
 											setView(!view);
@@ -173,33 +228,23 @@ export default function Test() {
 										</div>
 									</div>
 									{view ? <DropDown /> : ''}
-								</div>
+								</div> */}
 							</div>
 							<div className="item-2">카테고리</div>
-							<div className="item">
-								<select id="category-select" style={{ width: '125px' }} disabled>
-									<option value="all">전체</option>
-								</select>
+							<div className="item" css={BottomLine}>
+								{/* <Dropdown title="" type="" value="" /> */}
 							</div>
 						</div>
 						<div className="container-item">
 							<div className="item-1">회원 성별</div>
-							<div className="item">
-								<select id="user-select" style={{ width: '125px' }}>
-									<option value="all">전체</option>
-									<option value="man">남성</option>
-									<option value="woman">여성</option>
-								</select>
-							</div>
+							{/* 전체, 남성, 여성 */}
+							<div className="item" css={BottomLine}></div>
 							<div className="item-2">계좌 인증 여부</div>
-							<div className="item">
-								<select id="category-select" style={{ width: '125px' }}>
-									<option value="auth">인증</option>
-									<option value="noauth">미인증</option>
-								</select>
+							<div className="item" css={BottomLine}>
+								{/* 인증,미인증 */}
 							</div>
 						</div>
-						<div className="container-item-bottom">
+						<div className="container-item">
 							<div className="item-1">
 								회원 연령<p>(복수 선택 가능)</p>
 							</div>
@@ -238,16 +283,14 @@ export default function Test() {
 					<div className="frame-box">
 						<div className="frame-item">
 							<div className="frame-text-box">
-								<div className="frame-text-inner-box">
-									<div className="frame-text-top">전체 누적 회원수</div>
-									<div className="frame-text-mid">4,612,619 명</div>
-									<div className="frame-text-bottom">
-										어제 보다{' '}
-										<div className="blue_text" style={{ fontSize: FONT.FontSize10 }}>
-											151%
-										</div>{' '}
-										올랐어요.
-									</div>
+								<div className="frame-text-top">전체 누적 회원수</div>
+								<div className="frame-text-mid">4,612,619 명</div>
+								<div className="frame-text-bottom">
+									어제 보다{' '}
+									<div className="blue_text" style={{ fontSize: '15px' }}>
+										151%
+									</div>{' '}
+									올랐어요.
 								</div>
 							</div>
 							<div className="type-box">
@@ -382,31 +425,16 @@ export default function Test() {
 							<label htmlFor="filter" className="arrow-text">
 								초기화
 							</label>
-							<button id="filter" onClick={() => setText('')}>
+							<button id="filter" onClick={() => {}}>
 								<Icon.ArrowRepeat className="arrow-icon" />
 							</button>
 						</div>
 						<div className="item">
-							<select
-								id="join-select"
-								style={{
-									width: '180px',
-									height: '36px',
-									borderRadius: '5px',
-									padding: '5px 20px',
-									border: '1px solid #D8DBEF',
-									gap: '10px',
-								}}
-								defaultValue=""
-							>
-								<option value="" disabled>
-									계정생성 일자 순
-								</option>
+							{/* <option value="" disabled>	계정생성 일자 순</option>
 								<option value="date">계정생성 날짜 순</option>
 								<option value="point">보유 포인트 순</option>
 								<option value="cash">누적 결재 금액 순</option>
-								<option value="user">알람 받는 유저수 순</option>
-							</select>
+								<option value="user">알람 받는 유저수 순</option> */}
 						</div>
 					</div>
 				</div>
@@ -429,7 +457,18 @@ export default function Test() {
 								<th className="list-head-item">차단</th>
 							</tr>
 						</thead>
-						<tbody className="table-body">
+						<tbody
+							css={css`
+								display: table-row-group;
+								background-color: #f6f6fb;
+								& > tr {
+									cursor: pointer;
+									& :hover {
+										background-color: #d8dbef;
+									}
+								}
+							`}
+						>
 							<tr className="list-body">
 								<td className="list-body-item" style={{ maxWidth: '100px' }}>
 									김스토어
